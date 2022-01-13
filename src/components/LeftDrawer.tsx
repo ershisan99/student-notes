@@ -69,14 +69,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     justifyContent: "space-between",
 }));
 
-type HomeworksType = {
+type ContentsType = {
     text: string;
     path: string;
 };
 type LeftDrawerPropsType = {
-    homeworks: Array<HomeworksType>;
+    contents: Array<ContentsType>;
 };
-export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ homeworks }) => {
+export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -103,9 +103,6 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ homeworks }) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Оглавление
-                    </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -122,14 +119,14 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ homeworks }) => {
                 open={open}
             >
                 <DrawerHeader>
-                    Homeworks
+                    Оглавление
                     <IconButton onClick={handleDrawerClose}>
                         <ChevronLeftIcon />
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {homeworks.map((e, index) => (
+                    {contents.map((e, index) => (
                         <ListItem
                             button
                             key={e.text}
