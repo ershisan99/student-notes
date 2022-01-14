@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/student-notes/static/css/main.31d6cfe0.css",
-    "main.js": "/student-notes/static/js/main.b63b7ad8.js",
+    "main.js": "/student-notes/static/js/main.8e079644.js",
     "index.html": "/student-notes/index.html",
-    "main.b63b7ad8.js.map": "/student-notes/static/js/main.b63b7ad8.js.map"
+    "main.8e079644.js.map": "/student-notes/static/js/main.8e079644.js.map"
   },
   "entrypoints": [
     "static/css/main.31d6cfe0.css",
-    "static/js/main.b63b7ad8.js"
+    "static/js/main.8e079644.js"
   ]
 }
