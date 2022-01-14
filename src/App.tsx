@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Monday from "./Pages/Monday/Monday";
 import Tuesday from "./Pages/Tuesday/Tuesday";
@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <CssBaseline enableColorScheme />
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <Layout>
           <Routes>
             <Route path="/" element={<StartPage />} />
@@ -19,7 +19,7 @@ function App() {
             <Route path="/tuesday" element={<Tuesday />} />
           </Routes>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
