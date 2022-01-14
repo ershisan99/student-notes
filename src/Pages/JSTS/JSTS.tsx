@@ -1,22 +1,24 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
+import { JSTS_QUERY } from "../../components/RenderPage";
 import { Grid } from "@mui/material";
-import { MONDAY_QUERY } from "../../components/RenderPage";
 import { RichTextContent } from "@graphcms/rich-text-types";
 import { MyItem } from "../../components/MyItem";
 
-const Monday = () => {
-  const { loading, error, data } = useQuery(MONDAY_QUERY);
+const JSTS = () => {
+  const { loading, error, data } = useQuery(JSTS_QUERY);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
     <Grid container spacing={2} alignItems={"center"} justifyContent={"center"}>
-      {data.mondays.map((e: { mondayItem: { raw: RichTextContent } }) => (
-        <MyItem content={e.mondayItem.raw} />
-      ))}
+      {data.vanillaPageItems.map(
+        (e: { vanillaPageItem: { raw: RichTextContent } }) => (
+          <MyItem content={e.vanillaPageItem.raw} />
+        )
+      )}
     </Grid>
   );
 };
 
-export default Monday;
+export default JSTS;

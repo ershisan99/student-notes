@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { Grid, Typography } from "@mui/material";
 import { RichTextContent } from "@graphcms/rich-text-types";
 import { RichText } from "@graphcms/rich-text-react-renderer";
-import { INTRODUCTION_BLOCKS_QUERY } from "./index";
+import { INTRODUCTION_BLOCKS_QUERY } from "../../components/RenderPage";
 
 const StartPage = () => {
   const { loading, error, data } = useQuery(INTRODUCTION_BLOCKS_QUERY);

@@ -15,6 +15,23 @@ const Layout: React.FC = ({ children }) => {
       text: "Вторник",
       path: "/tuesday",
     },
+    {
+      text: "Среда",
+      path: "/wednesday",
+    },
+    {
+      text: "Вёрстка",
+      path: "/design",
+    },
+    {
+      text: "JS/TS",
+      path: "/jsts",
+    },
+
+    {
+      text: "React",
+      path: "/react",
+    },
   ];
   return (
     <div>
