@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <CssBaseline enableColorScheme />
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <Layout>
           <Routes>
             <Route path="/" element={<StartPage />} />
