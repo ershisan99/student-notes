@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <CssBaseline enableColorScheme />
-      <BrowserRouter basename={"/student-notes"}>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Layout>
           <Routes>
             <Route path="/" element={<StartPage />} />

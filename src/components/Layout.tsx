@@ -5,15 +5,15 @@ const Layout: React.FC = ({ children }) => {
   let contents = [
     {
       text: "Старт",
-      path: "/",
+      path: process.env.PUBLIC_URL + "/",
     },
     {
       text: "Понедельник",
-      path: "/monday",
+      path: process.env.PUBLIC_URL + "/monday",
     },
     {
       text: "Вторник",
-      path: "/tuesday",
+      path: process.env.PUBLIC_URL + "/tuesday",
     },
   ];
   return (
