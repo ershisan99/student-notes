@@ -4,6 +4,7 @@ import { Grid } from "@mui/material";
 import { DESIGN_QUERY } from "../../components/RenderPage";
 import { RichTextContent } from "@graphcms/rich-text-types";
 import { MyItem } from "../../components/MyItem";
+import MyGrid from "../../components/MyGrid";
 
 const Design = () => {
   const { loading, error, data } = useQuery(DESIGN_QUERY);
@@ -11,11 +12,11 @@ const Design = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
-    <Grid container spacing={2} alignItems={"center"} justifyContent={"center"}>
+    <MyGrid>
       {data.designs.map((e: { designItem: { raw: RichTextContent } }) => (
         <MyItem content={e.designItem.raw} />
       ))}
-    </Grid>
+    </MyGrid>
   );
 };
 

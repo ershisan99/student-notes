@@ -8,7 +8,7 @@ type MyItemPropTypes = {
 };
 
 export const MyItem = (props: MyItemPropTypes) => (
-  <Grid item xs={8}>
+  <Grid item xs={12}>
     <Paper sx={{ p: 3 }}>
       <MyRichText content={props.content} />
     </Paper>

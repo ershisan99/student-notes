@@ -16,6 +16,9 @@ import ListItemText from "@mui/material/ListItemText";
 
 import ArticleIcon from "@mui/icons-material/Article";
 import { useNavigate } from "react-router-dom";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Collapse, ListItemButton } from "@mui/material";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
@@ -71,6 +74,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 type ContentsType = {
   text: string;
   path: string;
+  isFolder: boolean;
+  contents?: Array<{ text: string; path: string }>;
 };
 type LeftDrawerPropsType = {
   contents: Array<ContentsType>;
@@ -85,7 +90,11 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const [listOpen, setListOpen] = useState(false);
 
+  const handleClick = () => {
+    setListOpen(!listOpen);
+  };
   const navigate = useNavigate();
 
   return (
@@ -125,26 +134,54 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {contents.map((e, index) => (
-            <ListItem
-              button
-              key={e.text}
-              onClick={() => {
-                navigate(e.path);
-                setOpen(false);
-              }}
-            >
-              <ListItemIcon>
-                <ArticleIcon />
-              </ListItemIcon>
-              <ListItemText primary={e.text} />
-            </ListItem>
-          ))}
+          {contents.map((e, index) =>
+            e.isFolder ? (
+              <>
+                <ListItemButton onClick={handleClick}>
+                  <ListItemIcon>
+                    <ArticleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={e.text} />
+                  {listOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={listOpen} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    {e.contents?.map((el) => (
+                      <ListItemButton
+                        onClick={() => {
+                          navigate(e.path + el.path);
+                          setOpen(false);
+                        }}
+                        sx={{ pl: 4 }}
+                      >
+                        <ListItemIcon>
+                          <ArticleIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={el.text} />
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </Collapse>
+              </>
+            ) : (
+              <ListItem
+                button
+                key={e.text}
+                onClick={() => {
+                  navigate(e.path);
+                  setOpen(false);
+                }}
+              >
+                <ListItemIcon>
+                  <ArticleIcon />
+                </ListItemIcon>
+                <ListItemText primary={e.text} />
+              </ListItem>
+            )
+          )}
         </List>
       </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-      </Main>
+      <Main open={open}></Main>
     </Box>
   );
 };

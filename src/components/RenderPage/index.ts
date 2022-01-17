@@ -81,3 +81,23 @@ export const REACT_QUERY = gql`
     }
   }
 `;
+
+export const GIT_QUERY = gql`
+  query {
+    gitItems {
+      gitItem {
+        raw
+      }
+    }
+  }
+`;
+
+export const INFO_QUERY = gql`
+  query {
+    additionalInfoItems {
+      additionalInfoItem {
+        raw
+      }
+    }
+  }
+`;

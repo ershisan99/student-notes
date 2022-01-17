@@ -1,25 +1,23 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { JSTS_QUERY } from "../../components/RenderPage";
 import { Grid } from "@mui/material";
+import { GIT_QUERY } from "../../components/RenderPage";
 import { RichTextContent } from "@graphcms/rich-text-types";
 import { MyItem } from "../../components/MyItem";
 import MyGrid from "../../components/MyGrid";
 
-const JSTS = () => {
-  const { loading, error, data } = useQuery(JSTS_QUERY);
+const Git = () => {
+  const { loading, error, data } = useQuery(GIT_QUERY);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
     <MyGrid>
-      {data.vanillaPageItems.map(
-        (e: { vanillaPageItem: { raw: RichTextContent } }) => (
-          <MyItem content={e.vanillaPageItem.raw} />
-        )
-      )}
+      {data.gitItems.map((e: { gitItem: { raw: RichTextContent } }) => (
+        <MyItem content={e.gitItem.raw} />
+      ))}
     </MyGrid>
   );
 };
 
-export default JSTS;
+export default Git;

@@ -4,6 +4,7 @@ import { Grid } from "@mui/material";
 import { TUESDAY_QUERY } from "../../components/RenderPage";
 import { RichTextContent } from "@graphcms/rich-text-types";
 import { MyItem } from "../../components/MyItem";
+import MyGrid from "../../components/MyGrid";
 
 const Tuesday = () => {
   const { loading, error, data } = useQuery(TUESDAY_QUERY);
@@ -11,11 +12,11 @@ const Tuesday = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   return (
-    <Grid container spacing={2} alignItems={"center"} justifyContent={"center"}>
+    <MyGrid>
       {data.tuesdays.map((e: { tuesdayItem: { raw: RichTextContent } }) => (
         <MyItem content={e.tuesdayItem.raw} />
       ))}
-    </Grid>
+    </MyGrid>
   );
 };
 
