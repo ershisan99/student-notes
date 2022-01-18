@@ -1,10 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { RichTextContent } from "@graphcms/rich-text-types";
-import { RichText } from "@graphcms/rich-text-react-renderer";
 import { INTRODUCTION_BLOCKS_QUERY } from "../../components/RenderPage";
-import MyRichText from "../../components/MyRichText";
 import { MyItem } from "../../components/MyItem";
 import MyGrid from "../../components/MyGrid";
 

@@ -5,7 +5,7 @@ const MyGrid: React.FC = ({ children }) => {
   return (
     <Grid
       spacing={2}
-      sx={{ maxWidth: 900, m: "0 auto" }}
+      sx={{ maxWidth: 1000, m: "0 auto" }}
       container
       alignItems={"center"}
       justifyContent={"center"}

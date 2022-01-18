@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { JSTS_QUERY } from "../../components/RenderPage";
-import { Grid } from "@mui/material";
 import { RichTextContent } from "@graphcms/rich-text-types";
 import { MyItem } from "../../components/MyItem";
 import MyGrid from "../../components/MyGrid";

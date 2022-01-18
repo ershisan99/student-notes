@@ -13,11 +13,20 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-
+import SearchIcon from "@mui/icons-material/Search";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ArticleIcon from "@mui/icons-material/Article";
 import { useNavigate } from "react-router-dom";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Collapse, ListItemButton } from "@mui/material";
+import {
+  alpha,
+  Collapse,
+  Fab,
+  InputBase,
+  ListItemButton,
+  useScrollTrigger,
+  Zoom,
+} from "@mui/material";
 import { useState } from "react";
 
 const drawerWidth = 240;
@@ -26,7 +35,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  padding: theme.spacing(3),
+
   transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -80,6 +89,60 @@ type ContentsType = {
 type LeftDrawerPropsType = {
   contents: Array<ContentsType>;
 };
+
+function ScrollTop({ children }: any) {
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const anchor = (
+      (event.target as HTMLDivElement).ownerDocument || document
+    ).querySelector("#back-to-top-anchor");
+
+    if (anchor) {
+      anchor.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <Box
+        onClick={handleClick}
+        role="presentation"
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+      >
+        {children}
+      </Box>
+    </Zoom>
+  );
+}
+
+export const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
+
 export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -97,20 +160,58 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
   };
   const navigate = useNavigate();
 
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+    },
+  }));
+
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ flexGrow: 1 }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
+      <AppBar position="static" open={open}>
+        <Toolbar id="back-to-top-anchor">
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
+            size="large"
+            sx={{
+              mr: 2,
+              ...(open && { display: "none" }),
+            }}
           >
             <MenuIcon />
           </IconButton>
+          {/*<Search>*/}
+          {/*  <SearchIconWrapper>*/}
+          {/*    <SearchIcon />*/}
+          {/*  </SearchIconWrapper>*/}
+          {/*  <StyledInputBase*/}
+          {/*    placeholder="Search…"*/}
+          {/*    inputProps={{ "aria-label": "search" }}*/}
+          {/*  />*/}
+          {/*</Search>*/}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -122,7 +223,8 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
             boxSizing: "border-box",
           },
         }}
-        variant="persistent"
+        variant="temporary"
+        onClose={handleDrawerClose}
         anchor="left"
         open={open}
       >
@@ -181,7 +283,13 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
           )}
         </List>
       </Drawer>
+
       <Main open={open}></Main>
+      <ScrollTop>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
     </Box>
   );
 };
