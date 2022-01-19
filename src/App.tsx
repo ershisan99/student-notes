@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Monday from "./Pages/InterviewQuestions/Monday";
 import Tuesday from "./Pages/InterviewQuestions/Tuesday";
 import StartPage from "./Pages/Start Page/StartPage";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import Wednesday from "./Pages/InterviewQuestions/Wednesday";
 import Design from "./Pages/Design/Design";
 import JSTS from "./Pages/JSTS/JSTS";
 import ReactPage from "./Pages/ReactPage/ReactPage";
 import Git from "./Pages/Git/Git";
 import AdditionalInfo from "./Pages/AdditionalInfo/AdditionalInfo";
+import { useAppSelector } from "./state/hooks";
+import { darkTheme, lightTheme } from "./theme/theme";
 
 function App() {
+  const theme = useAppSelector((state) => state.theme);
   return (
-    <>
+    <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
       <CssBaseline enableColorScheme />
       <HashRouter>
         <Layout>
@@ -35,7 +38,7 @@ function App() {
           </Routes>
         </Layout>
       </HashRouter>
-    </>
+    </ThemeProvider>
   );
 }
 

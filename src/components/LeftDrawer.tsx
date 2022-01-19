@@ -28,6 +28,10 @@ import {
   Zoom,
 } from "@mui/material";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../state/hooks";
+import { toggleTheme } from "../theme/themeSlice";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
 
 const drawerWidth = 240;
 
@@ -185,6 +189,9 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
     justifyContent: "center",
   }));
 
+  const theme = useAppSelector((state) => state.theme);
+  const dispatch = useAppDispatch();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <CssBaseline />
@@ -202,6 +209,13 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({ contents }) => {
             }}
           >
             <MenuIcon />
+          </IconButton>
+          <IconButton
+            sx={{ ml: 1, justifySelf: "flex-end" }}
+            onClick={() => dispatch(toggleTheme())}
+            color="inherit"
+          >
+            {theme.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
           {/*<Search>*/}
           {/*  <SearchIconWrapper>*/}
