@@ -153,10 +153,7 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
    return (
       <Box sx={{ flexGrow: 1, height: '100%' }}>
          <AppBar open={open}>
-            <Toolbar
-               id="back-to-top-anchor"
-               sx={{ justifyContent: 'space-between' }}
-            >
+            <Toolbar sx={{ justifyContent: 'space-between' }}>
                <Box>
                   <IconButton
                      color="inherit"
@@ -188,7 +185,7 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
                />
             </Toolbar>
          </AppBar>
-         <Toolbar />
+         <Toolbar id="back-to-top-anchor" />
          <Drawer
             sx={{
                width: drawerWidth,
