@@ -18,15 +18,15 @@ export const SearchResultsPage: React.FC<SearchResultsPageType> = ({
 }) => {
    return (
       <>
-         <AdditionalInfo search={search} />
-         <Design search={search} />
-         <Git search={search} />
+         <StartPage search={search} />
          <Monday search={search} />
          <Tuesday search={search} />
          <Wednesday search={search} />
+         <Design search={search} />
          <JSTS search={search} />
          <ReactPage search={search} />
-         <StartPage search={search} />
+         <Git search={search} />
+         <AdditionalInfo search={search} />
       </>
    )
 }
