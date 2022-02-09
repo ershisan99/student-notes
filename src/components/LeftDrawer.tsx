@@ -188,6 +188,7 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
                />
             </Toolbar>
          </AppBar>
+         <Toolbar />
          <Drawer
             sx={{
                width: drawerWidth,
