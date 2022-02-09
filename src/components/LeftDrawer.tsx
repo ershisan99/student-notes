@@ -151,8 +151,8 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
    const dispatch = useAppDispatch()
 
    return (
-      <Box sx={{ flexGrow: 1 }}>
-         <AppBar position="static" open={open}>
+      <Box sx={{ flexGrow: 1, height: '100%' }}>
+         <AppBar open={open}>
             <Toolbar
                id="back-to-top-anchor"
                sx={{ justifyContent: 'space-between' }}
