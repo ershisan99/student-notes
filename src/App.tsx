@@ -12,16 +12,16 @@ import JSTS from "./Pages/JSTS/JSTS";
 import ReactPage from "./Pages/ReactPage/ReactPage";
 import Git from "./Pages/Git/Git";
 import AdditionalInfo from "./Pages/AdditionalInfo/AdditionalInfo";
-import { useAppSelector } from "./state/hooks";
 import { darkTheme, lightTheme } from "./theme/theme";
+import { useBoolean } from "./state/hooks";
 
 function App() {
-  const theme = useAppSelector((state) => state.theme);
+  const { value: isDarkTheme, toggle: toggleDarkTheme } = useBoolean(true);
   return (
-    <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <CssBaseline enableColorScheme />
       <HashRouter>
-        <Layout>
+        <Layout toggleDarkTheme={toggleDarkTheme}>
           <Routes>
             <Route path="/" element={<StartPage />} />
             <Route path="/interviewQuestions/monday" element={<Monday />} />
