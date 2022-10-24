@@ -22,14 +22,15 @@ const StartPage: React.FC<{ search?: string }> = ({ search }) => {
           sx={{
             height: "calc(100vh - 64px)",
             width: "100%",
-            textAlign: "center",
-            my: 5,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <img
             src={data.coverImage.coverImage.url}
-            height={"90%"}
             alt={"intro"}
+            className={"introImg"}
           />
         </Box>
       )}

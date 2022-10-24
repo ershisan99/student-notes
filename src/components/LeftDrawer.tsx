@@ -155,7 +155,7 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
     <Box sx={{ flexGrow: 1, height: "100%" }}>
       <AppBar open={open}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Box>
+          <div style={{ display: "flex" }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -177,7 +177,7 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
             >
               {isDarkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
-          </Box>
+          </div>
           <Search
             searchValue={searchValue}
             changeSearchValue={changeSearchValue}
