@@ -1,11 +1,11 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { Grid } from "@mui/material";
 
-const MyGrid: React.FC = ({ children }) => {
+const MyGrid: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Grid
       spacing={2}
-      sx={{ maxWidth: 1000, m: "0 auto" }}
+      sx={{ maxWidth: 1000 }}
       container
       alignItems={"center"}
       justifyContent={"center"}

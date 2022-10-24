@@ -35,18 +35,18 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-
+  display: "flex",
+  justifyContent: "center",
+  padding: "15px",
   transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  marginLeft: `-${drawerWidth}px`,
   ...(open && {
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0,
   }),
 }));
 
@@ -91,6 +91,7 @@ type LeftDrawerPropsType = {
   searchValue: string;
   changeSearchValue: (value: string) => void;
   toggleDarkTheme: () => void;
+  children: React.ReactNode;
 };
 
 function ScrollTop({ children }: any) {
@@ -131,8 +132,11 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
   searchValue,
   changeSearchValue,
   toggleDarkTheme,
+  children,
 }) => {
   const [open, setOpen] = React.useState(false);
+  const [listOpen, setListOpen] = useState(false);
+  const navigate = useNavigate();
   const theme = useTheme();
   const isDarkTheme = theme.palette.mode === "dark";
   const handleDrawerOpen = () => {
@@ -142,12 +146,10 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [listOpen, setListOpen] = useState(false);
 
   const handleClick = () => {
     setListOpen(!listOpen);
   };
-  const navigate = useNavigate();
 
   return (
     <Box sx={{ flexGrow: 1, height: "100%" }}>
@@ -167,7 +169,12 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
             >
               <MenuIcon />
             </IconButton>
-            <IconButton onClick={toggleDarkTheme} color="inherit">
+            <IconButton
+              onClick={toggleDarkTheme}
+              color="inherit"
+              edge="start"
+              size="large"
+            >
               {isDarkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
           </Box>
@@ -248,7 +255,7 @@ export const LeftDrawer: React.FC<LeftDrawerPropsType> = ({
         </List>
       </Drawer>
 
-      <Main open={open}></Main>
+      <Main open={open}>{children}</Main>
       <ScrollTop>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

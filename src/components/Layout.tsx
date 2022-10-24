@@ -67,8 +67,9 @@ const Layout: React.FC<Props> = ({ children, toggleDarkTheme }) => {
         searchValue={search}
         changeSearchValue={setSearch}
         toggleDarkTheme={toggleDarkTheme}
-      />
-      {search ? <SearchResultsPage search={search} /> : children}
+      >
+        {search ? <SearchResultsPage search={search} /> : children}
+      </LeftDrawer>
     </div>
   );
 };

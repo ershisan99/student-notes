@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
@@ -13,10 +13,21 @@ import ReactPage from "./Pages/ReactPage/ReactPage";
 import Git from "./Pages/Git/Git";
 import AdditionalInfo from "./Pages/AdditionalInfo/AdditionalInfo";
 import { darkTheme, lightTheme } from "./theme/theme";
-import { useBoolean } from "./state/hooks";
 
 function App() {
-  const { value: isDarkTheme, toggle: toggleDarkTheme } = useBoolean(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const toggleDarkTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem("isDarkTheme", JSON.stringify(!isDarkTheme));
+  };
+
+  useEffect(() => {
+    const isDarkTheme = JSON.parse(
+      localStorage.getItem("isDarkTheme") || "true"
+    );
+    setIsDarkTheme(isDarkTheme);
+  }, []);
+
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <CssBaseline enableColorScheme />
